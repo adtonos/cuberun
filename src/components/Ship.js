@@ -260,23 +260,23 @@ function ShipModel(props, { children }) {
           <meshLambertMaterial attach="material" color="white" />
         </mesh>
         <mesh ref={leftWingTrail} scale={[0.1, 0.05, 2]} position={[1.4, 0.2, -7]}>
-          <dodecahedronBufferGeometry args={[1.5, 3]} />
+          <dodecahedronGeometry args={[1.5, 3]} />
           <meshBasicMaterial transparent opacity={0.8} color="white" />
         </mesh>
         <mesh ref={rightWingTrail} scale={[0.1, 0.05, 2]} position={[-1.4, 0.2, -7]}>
-          <dodecahedronBufferGeometry args={[1.5, 3]} />
+          <dodecahedronGeometry args={[1.5, 3]} />
           <meshBasicMaterial transparent opacity={0.8} color="white" />
         </mesh>
         <mesh visible={true} ref={innerConeExhaust} position={[0, -0.3, 0.3]} rotation={[Math.PI / 2, 0, Math.PI]}>
-          <latheBufferGeometry args={[innerLathe, 20]} />
+          <latheGeometry args={[innerLathe, 20]} />
           <meshLambertMaterial transparent opacity={1} color="white" />
         </mesh>
         <mesh visible={true} ref={coneExhaust} position={[0, -0.3, 0.25]} rotation={[Math.PI / 2, 0, Math.PI]}>
-          <latheBufferGeometry args={[mediumLathe, 30]} />
+          <latheGeometry args={[mediumLathe, 30]} />
           <meshLambertMaterial transparent opacity={0.8} map={noise} color={0xAAAAAA} emissive="red" emissiveIntensity={1} />
         </mesh>
         <mesh visible={true} ref={outerConeExhaust} position={[0, -0.3, 0]} rotation={[Math.PI / 2, 0, Math.PI]}>
-          <latheBufferGeometry args={[lathe, 50]} />
+          <latheGeometry args={[lathe, 50]} />
           <meshLambertMaterial transparent alphaMap={exhaust} map={exhaust} color="hotpink" />
         </mesh>
       </group>

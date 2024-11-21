@@ -76,7 +76,7 @@ export default function InstancedCubes() {
 
   return (
     <instancedMesh ref={mesh} args={[null, null, diamondCoords.length]}>
-      <boxBufferGeometry args={[20, 40, 20]} />
+      <boxGeometry args={[20, 40, 20]} />
       <meshBasicMaterial ref={material} color={COLORS[0].three} />
     </instancedMesh>
   )

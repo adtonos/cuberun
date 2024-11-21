@@ -3,20 +3,32 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.16.0",
+    "@babel/preset-react": "^7.16.0",
+    "babel-preset-react-app": "^10.0.0",
+    "browserify-zlib": "^0.2.0",
+    "cross-env": "^7.0.3",
+    "next": "^15.0.3",
     "@react-three/drei": "^5.3.1",
     "@react-three/fiber": "^6.2.2",
-    "react": "^18.0.0-alpha-ed6c091fe-20210701",
-    "react-device-detect": "^1.17.0",
-    "react-dom": "^18.0.0-alpha-ed6c091fe-20210701",
-    "react-scripts": "4.0.3",
-    "three": "^0.129.0",
+    "plyr-react": "^5.3.0",
+    "react": "^18.3.1",
+    "react-device-detect": "^2.2.3",
+    "react-dom": "^18.3.1",
+    "react-scripts": "^5.0.1",
+    "three": "^0.135.0",
     "zustand": "^3.5.2"
   },
+  "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.21.0",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+  },
   "scripts": {
-    "start": "HOST=0.0.0.0 react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "HOST=0.0.0.0 NODE_OPTIONS='--openssl-legacy-provider --trace-deprecation' react-scripts start",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
+    "test": "NODE_OPTIONS=--openssl-legacy-provider react-scripts test",
+    "eject": "NODE_OPTIONS=--openssl-legacy-provider react-scripts eject"
   },
   "eslintConfig": {
     "extends": [

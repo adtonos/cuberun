@@ -14,6 +14,7 @@ const GameOverScreen = () => {
 
   const gameOver = useStore(s => s.gameOver)
   const score = useStore(s => s.score)
+  const setPlayingAds = useStore(s => s.setPlayingAds)
 
   useEffect(() => {
     let t
@@ -43,7 +44,7 @@ const GameOverScreen = () => {
   }, [gameOver, highScores, score])
 
   const handleRestart = () => {
-    window.location.reload() // TODO: make a proper restart
+    setPlayingAds(true);
   }
 
   return shown ? (

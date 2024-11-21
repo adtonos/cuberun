@@ -109,11 +109,11 @@ function HyperspaceTunnel() {
   return (
     <group ref={tunnels}>
       <mesh ref={tunnel} position={[0, 0, -4300]} rotation={[0, -Math.PI / 2, Math.PI / 2]}>
-        <latheBufferGeometry args={[lathe, 50]} />
+        <latheGeometry args={[lathe, 50]} />
         <meshStandardMaterial fog={false} attach="material" side={BackSide} emissiveIntensity={0.4} emissive={COLORS[5].three} map={texture} />
       </mesh>
       <mesh visible={false} ref={tunnel2} position={[0, 0, -4300]} rotation={[0, -Math.PI / 2, Math.PI / 2]}>
-        <latheBufferGeometry args={[lathe2, 50]} />
+        <latheGeometry args={[lathe2, 50]} />
         <meshStandardMaterial fog={false} attach="material" side={BackSide} emissiveIntensity={0.4} emissive={COLORS[5].three} map={texture} />
       </mesh>
     </group>

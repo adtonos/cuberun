@@ -80,43 +80,43 @@ export default function Arch() {
   return (
     <group ref={arches}>
       <mesh ref={arch1} position={[0, 0, -150]} rotation={[0, 0, Math.PI]}>
-        <torusBufferGeometry args={[100, 20, 3, 30]} />
+        <torusGeometry args={[100, 20, 3, 30]} />
         <meshBasicMaterial fog={false} attach="material" color={COLORS[0].three} />
       </mesh>
       <mesh ref={arch2} position={[0, 0, -200]} rotation={[0, 0, Math.PI]}>
-        <torusBufferGeometry args={[90, 16, 3, 30]} />
+        <torusGeometry args={[90, 16, 3, 30]} />
         <meshBasicMaterial fog={false} attach="material" color={COLORS[1].three} />
       </mesh>
       <mesh ref={arch3} position={[0, 0, -250]} rotation={[0, 0, Math.PI]}>
-        <torusBufferGeometry args={[80, 12, 3, 30]} />
+        <torusGeometry args={[80, 12, 3, 30]} />
         <meshBasicMaterial fog={false} attach="material" color={COLORS[2].three} />
       </mesh>
       <mesh ref={arch4} position={[0, 0, -300]} rotation={[0, 0, Math.PI]}>
-        <torusBufferGeometry args={[70, 10, 3, 30]} />
+        <torusGeometry args={[70, 10, 3, 30]} />
         <meshBasicMaterial fog={false} attach="material" color={COLORS[3].three} />
       </mesh>
       <mesh ref={arch5} position={[0, 0, -350]} rotation={[0, 0, Math.PI]}>
-        <torusBufferGeometry args={[60, 8, 3, 30]} />
+        <torusGeometry args={[60, 8, 3, 30]} />
         <meshBasicMaterial fog={false} attach="material" color={COLORS[4].three} />
       </mesh>
       <mesh ref={arch6} position={[0, 0, -400]} rotation={[0, 0, Math.PI]}>
-        <torusBufferGeometry args={[50, 6, 3, 30]} />
+        <torusGeometry args={[50, 6, 3, 30]} />
         <meshBasicMaterial fog={false} attach="material" color={COLORS[5].three} />
       </mesh>
       <mesh visible={false} ref={arch7} position={[0, 0, -1980]} rotation={[0, 0, Math.PI]}>
-        <torusBufferGeometry args={[50, 10, 3, 30]} />
+        <torusGeometry args={[50, 10, 3, 30]} />
         <meshBasicMaterial fog={false} attach="material" color={COLORS[0].three} />
       </mesh>
       <mesh visible={false} ref={arch8} position={[0, 0, -1920]} rotation={[0, 0, Math.PI]}>
-        <torusBufferGeometry args={[50, 10, 3, 30]} />
+        <torusGeometry args={[50, 10, 3, 30]} />
         <meshBasicMaterial fog={false} attach="material" color={COLORS[0].three} />
       </mesh>
       <mesh visible={false} ref={arch9} position={[0, 0, -1880]} rotation={[0, 0, Math.PI]}>
-        <torusBufferGeometry args={[50, 10, 3, 30]} />
+        <torusGeometry args={[50, 10, 3, 30]} />
         <meshBasicMaterial fog={false} attach="material" color={COLORS[0].three} />
       </mesh>
       <mesh visible={false} ref={arch10} position={[0, 0, -1820]} rotation={[0, 0, Math.PI]}>
-        <torusBufferGeometry args={[50, 10, 3, 30]} />
+        <torusGeometry args={[50, 10, 3, 30]} />
         <meshBasicMaterial fog={false} attach="material" color={COLORS[0].three} />
       </mesh>
     </group>

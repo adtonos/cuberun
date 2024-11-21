@@ -24,7 +24,7 @@ import Sound from './Sound'
 import Overlay from './html/Overlay'
 import Hud from './html/Hud'
 import GameOverScreen from './html/GameOverScreen'
-
+import VideoAd from './html/VideoAd'
 
 export default function CubeWorld({ color, bgColor }) {
   const directionalLight = useStore((s) => s.directionalLight)
@@ -59,6 +59,7 @@ export default function CubeWorld({ color, bgColor }) {
       <Hud />
       <GameOverScreen />
       <Overlay />
+      <VideoAd />
     </>
   )
 }

@@ -111,7 +111,7 @@ function Ground() {
           visible
           rotation={[-Math.PI / 2, 0, 0]}
         >
-          <planeBufferGeometry attach="geometry" args={[PLANE_SIZE, PLANE_SIZE, 1, 1]} />
+          <planeGeometry attach="geometry" args={[PLANE_SIZE, PLANE_SIZE, 1, 1]} />
           <meshStandardMaterial
             receiveShadow
             color={color.set(0xFFFFFF)}
@@ -132,7 +132,7 @@ function Ground() {
           visible
           rotation={[-Math.PI / 2, 0, 0]}
         >
-          <planeBufferGeometry attach="geometry" args={[PLANE_SIZE, PLANE_SIZE, 1, 1]} />
+          <planeGeometry attach="geometry" args={[PLANE_SIZE, PLANE_SIZE, 1, 1]} />
           <meshStandardMaterial
             receiveShadow
             emissiveMap={textures[1]}
@@ -155,7 +155,7 @@ function LoadingGround() {
       position={[0, 0, 0]}
       rotation={[-Math.PI / 2, 0, 0]}
     >
-      <planeBufferGeometry attach="geometry" args={[5000, 5000, 1, 1]} />
+      <planeGeometry attach="geometry" args={[5000, 5000, 1, 1]} />
       <meshStandardMaterial
         receiveShadow
         attach="material"

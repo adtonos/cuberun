@@ -1,0 +1,57 @@
+
+
+input[type='range']::-webkit-slider-thumb {
+  display: none;
+}
+
+.plyr__controls {
+  background: none !important;
+}
+
+.plyr--full-ui input[type=range] {
+  color: #FF4700 !important;
+}
+
+.ad__video {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 100%;
+  background-color: #011A2F;
+}
+
+.ad__banner {
+  position: fixed;
+  text-align: center;
+  width: 100%;
+}
+
+/* For portrait */
+@media screen and (orientation: portrait) {
+  .ad__banner {
+    bottom: 1em;
+    padding: 1em;
+  }
+}
+
+/* For landscape */
+@media screen and (orientation: landscape) {
+  .ad__banner {
+    top: 1em;
+    padding: 1em 5em;
+  }
+}
+
+.ad__banner img {
+  max-width: 100%;
+}
+
+.ad__close {
+  position: fixed;
+  right: 1em;
+  top: 1em;
+  width: 40px;
+  opacity: 50%;
+}
