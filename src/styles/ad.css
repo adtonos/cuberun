@@ -32,27 +32,8 @@
   opacity: 50%;
 }
 
-.video-js .vjs-play-progress {
-  background-color: #FF4700 !important;
-}
-
-.video-js .vjs-play-progress:before {
-  content: "" !important;
-}
-
-.video-js .vjs-load-progress, .video-js .vjs-big-play-button {
+.video-js .vjs-big-play-button {
   display: none !important;
-}
-
-.video-js .vjs-slider, .video-js .vjs-control-bar {
-  background-color: rgba(0, 0, 0, 0) !important;
-}
-
-.video-js .vjs-control-bar {
-  visibility: visible !important;
-  opacity: 1 !important;
-  transition: none !important;
-  transition-delay: unset !important;
 }
 
 body>img, .iub__us-widget {

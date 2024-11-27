@@ -6,7 +6,9 @@ import '../../styles/ad.css'
 import placeholderVideo from '../../video/placeholder.mp4'
 import placeholderImg from '../../video/placeholder.png'
 
-import '@arte/videojs-vast';
+import 'videojs-contrib-ads';
+import 'videojs-ima';
+import 'videojs-ima/dist/videojs.ima.css';
 
 import VideoJS from './VideoJS'
 
@@ -24,23 +26,8 @@ async function getListenerId() {
 const videoJsOptions = {
   debug: true,
   autoplay: false,
-  controls: true,
+  controls: false,
   bigPlayButton: false,
-  controlBar: {
-    playToggle: false,
-    captionsButton: false,
-    chaptersButton: false,
-    subtitlesButton: false,
-    remainingTimeDisplay: false,
-    progressControl: {
-      seekBar: true
-    },
-    fullscreenToggle: false,
-    playbackRateMenuButton: false,
-    pictureInPictureToggle: false,
-    volumePanel: false,
-    bigPlayButton: false,
-  },
   responsive: true,
   fluid: true,
   poster: placeholderImg,
@@ -52,8 +39,6 @@ const videoJsOptions = {
   ],
   autoSetup: true,
 };
-
-
 
 const VideoAd = () => {
   const [shown, setShown] = useState(false)
@@ -86,8 +71,7 @@ const VideoAd = () => {
         enableMusic(false)
         setGameOver(false);
         setShown(true)
-        playerRef.current.play();
-        playerRef.current.controls(true);
+        setTimeout(() => { playerRef.current.play() }, 100);
       } else {
         window.location.reload();
       }
@@ -103,29 +87,19 @@ const VideoAd = () => {
   const handlePlayerReady = (player) => {
     playerRef.current = player;
 
-    player.vast({
-      vastUrl: `https://vast-adapter.adtonos.com/xml/83CMyMvzGSLQAj7mf/vast.xml?contentType=video&listenerId=${listenerId}`,
-      debug: true,
-    });
+    player.ima({adTagUrl: `https://vast-adapter.adtonos.com/xml/83CMyMvzGSLQAj7mf/vast.xml?contentType=video&listenerId=${listenerId}`});
 
-    player.on('adsready', (event) => {
+    player.on('ads-manager', (event) => {
       setReady(true);
+
+      // eslint-disable-next-line no-undef
+      event.adsManager.addEventListener(google.ima.AdEvent.Type.ALL_ADS_COMPLETED, () => {
+        window.location.reload();
+      });
     });
 
-    player.on('vast.play', (event, data) => {
+    player.on('ads-ad-started', () => {
       setTimeout(() => {closeRef.current.style.opacity = 1}, 15000)
-    });
-
-    player.on('vast.complete', (event, data) => {
-      window.location.reload();
-    });
-
-    player.on('waiting', () => {
-      window.location.reload();
-    });
-
-    player.on('vast.error', (event) => {
-      setReady(false);
     });
   };
 

@@ -67,7 +67,7 @@ const GameOverScreen = () => {
             ))}
           </div>
         </div>
-        <button onClick={handleRestart} className="game__menu-button">RESTART</button>
+        <button onClick={handleRestart} className="game__menu-button">PLAY AGAIN</button>
       </div>
     </div>
   ) : null

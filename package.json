@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@arte/videojs-vast": "^1.4.0",
     "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.16.0",
     "@babel/preset-react": "^7.16.0",
@@ -19,6 +18,7 @@
     "react-dom": "^18.3.1",
     "react-scripts": "^5.0.1",
     "three": "^0.135.0",
+    "videojs-ima": "^2.3.0",
     "zustand": "^3.5.2"
   },
   "devDependencies": {
@@ -27,7 +27,7 @@
   },
   "scripts": {
     "start": "HOST=0.0.0.0 NODE_OPTIONS='--openssl-legacy-provider --trace-deprecation' react-scripts start",
-    "build": "PUBLIC_URL=/game NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
+    "build": "PUBLIC_URL=/demo-game NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
     "test": "NODE_OPTIONS=--openssl-legacy-provider react-scripts test",
     "eject": "NODE_OPTIONS=--openssl-legacy-provider react-scripts eject"
   },
