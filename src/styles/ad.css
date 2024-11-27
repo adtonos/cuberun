@@ -1,17 +1,5 @@
 
 
-input[type='range']::-webkit-slider-thumb {
-  display: none;
-}
-
-.plyr__controls {
-  background: none !important;
-}
-
-.plyr--full-ui input[type=range] {
-  color: #FF4700 !important;
-}
-
 .ad__video {
   text-align: center;
   display: flex;
@@ -22,30 +10,18 @@ input[type='range']::-webkit-slider-thumb {
   background-color: #011A2F;
 }
 
-.ad__banner {
-  position: fixed;
-  text-align: center;
-  width: 100%;
-}
-
 /* For portrait */
 @media screen and (orientation: portrait) {
-  .ad__banner {
-    bottom: 1em;
-    padding: 1em;
+  .ad__video_box {
+    width: 100%;
   }
 }
 
 /* For landscape */
 @media screen and (orientation: landscape) {
-  .ad__banner {
-    top: 1em;
-    padding: 1em 5em;
+  .ad__video_box {
+    width: 75vh;
   }
-}
-
-.ad__banner img {
-  max-width: 100%;
 }
 
 .ad__close {
@@ -54,4 +30,31 @@ input[type='range']::-webkit-slider-thumb {
   top: 1em;
   width: 40px;
   opacity: 50%;
+}
+
+.video-js .vjs-play-progress {
+  background-color: #FF4700 !important;
+}
+
+.video-js .vjs-play-progress:before {
+  content: "" !important;
+}
+
+.video-js .vjs-load-progress, .video-js .vjs-big-play-button {
+  display: none !important;
+}
+
+.video-js .vjs-slider, .video-js .vjs-control-bar {
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.video-js .vjs-control-bar {
+  visibility: visible !important;
+  opacity: 1 !important;
+  transition: none !important;
+  transition-delay: unset !important;
+}
+
+body>img {
+  display: none;
 }

@@ -11,6 +11,7 @@ const useStore = create((set, get) => {
     level: 0,
     gameOver: false,
     gameStarted: false,
+    prepareAds: false,
     playingAds: false,
     musicEnabled: JSON.parse(localStorage.getItem('musicEnabled')) ?? false,
     isSpeedingUp: false,
@@ -30,6 +31,7 @@ const useStore = create((set, get) => {
     setScore: (score) => set(state => ({ score: score })),
     setGameStarted: (started) => set(state => ({ gameStarted: started })),
     setGameOver: (over) => set(state => ({ gameOver: over })),
+    setPrepareAds: (prepare) => set(state => ({ prepareAds: prepare })),
     setPlayingAds: (playing) => set(state => ({ playingAds: playing })),
     enableMusic: (enabled) => set(state => ({ musicEnabled: enabled }))
   }

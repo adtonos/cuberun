@@ -1,47 +1,60 @@
 import { useState, useEffect, useRef } from 'react'
 import { useStore } from '../../state/useStore'
-import { addEffect } from '@react-three/fiber'
 
 import closeButton from '../../textures/close.png'
 import '../../styles/ad.css'
+import placeholderVideo from '../../video/placeholder.mp4'
+import placeholderImg from '../../video/placeholder.png'
 
-import Plyr from "plyr-react"
-import "plyr-react/plyr.css"
+import '@arte/videojs-vast';
 
-const controls = `
-<div class="plyr__controls">
-  <div class="plyr__controls__item plyr__progress__container">
-    <div class="plyr__progress">
-      <input data-plyr="seek" type="range" min="0" max="100" step="0.01" value="0" autocomplete="off" role="slider" aria-label="Seek">
-    </div>
-  </div>
-</div>
-`;
+import VideoJS from './VideoJS'
 
-const plyrProps = {
-  source: {
-    type: 'video',
-    title: 'AdTonos Ads',
-    sources: [
-      {
-        src: 'https://files.adtonos.com/audio-in-video-demo-ad.mp4',
-        type: 'video/mp4',
-        size: 720,
-      },
-    ],
+
+const videoJsOptions = {
+  debug: true,
+  autoplay: false,
+  controls: true,
+  bigPlayButton: false,
+  controlBar: {
+    playToggle: false,
+    captionsButton: false,
+    chaptersButton: false,
+    subtitlesButton: false,
+    remainingTimeDisplay: false,
+    progressControl: {
+      seekBar: true
+    },
+    fullscreenToggle: false,
+    playbackRateMenuButton: false,
+    pictureInPictureToggle: false,
+    volumePanel: false,
+    bigPlayButton: false,
   },
-  options: {
-    autoplay: false,
-    hideControls: false,
-    controls,
-  }
-}
+  responsive: true,
+  fluid: true,
+  poster: placeholderImg,
+  sources: [
+    {
+      src: placeholderVideo,
+      type: 'video/mp4',
+    }
+  ],
+  autoSetup: true,
+};
+
+const vastVjsOptions = {
+  vastUrl: 'https://vast-adapter.adtonos.com/xml/83CMyMvzGSLQAj7mf/vast.xml?contentType=video',
+  debug: true,
+};
 
 const VideoAd = () => {
-
-  const [shown, setShown] = useState(true)
+  const [shown, setShown] = useState(false)
+  const [active, setActive] = useState(false)
+  const [ready, setReady] = useState(false)
 
   const playingAds = useStore(s => s.playingAds)
+  const prepareAds = useStore(s => s.prepareAds)
   const enableMusic = useStore(s => s.enableMusic)
   const setGameOver = useStore(s => s.setGameOver)
 
@@ -49,54 +62,69 @@ const VideoAd = () => {
   const closeRef = useRef()
 
   useEffect(() => {
-    console.log("internal plyr instance:", playerRef.current.plyr)
-  })
-
-  let then = Date.now()
-
-  useEffect(() => addEffect(() => {
-    const now = Date.now()
-
-    if (now - then > 100) { // throttle these to a max of 10 updates/sec
-      if (closeRef.current && playerRef.current) {
-        if (playerRef.current.plyr.currentTime > 10 && playerRef.current.plyr.currentTime < 10.75) {
-          closeRef.current.style.opacity = (10 - playerRef.current.plyr.currentTime) * -1;
-        }
-      }
-      // eslint-disable-next-line
-      then = now
+    if (prepareAds) {
+      setActive(true)
+    } else {
+      setActive(false)
     }
-  }))
+  }, [prepareAds, active, setActive])
 
   useEffect(() => {
     if (playingAds) {
-      enableMusic(false)
-      setGameOver(false);
-      setShown(true)
-      playerRef.current.plyr.play()
-      playerRef.current.plyr.once('ended', (event) => {
+      if (ready) {
+        enableMusic(false)
+        setGameOver(false);
+        setShown(true)
+        playerRef.current.play();
+        playerRef.current.controls(true);
+      } else {
         window.location.reload();
-      });
+      }
     } else {
       setShown(false)
     }
-  }, [playingAds, enableMusic, setGameOver])
+  }, [playingAds, enableMusic, setGameOver, ready])
 
   const handleClose = () => {
     window.location.reload();
   }
 
-  return (
+  const handlePlayerReady = (player) => {
+    playerRef.current = player;
+
+    player.vast(vastVjsOptions);
+
+    player.on('adsready', (event) => {
+      setReady(true);
+    });
+
+    player.on('vast.play', (event, data) => {
+      setTimeout(() => {closeRef.current.style.opacity = 1}, 15000)
+    });
+
+    player.on('vast.complete', (event, data) => {
+      window.location.reload();
+    });
+
+    player.on('waiting', () => {
+      window.location.reload();
+    });
+
+    player.on('vast.error', (event) => {
+      setReady(false);
+    });
+  };
+
+  return active ? (
     <div className="game__container" style={{ display: shown ? 'block' : 'none' }}>
       <div className="ad__video">
-        <Plyr ref={playerRef}{...plyrProps}  />
-      </div>
-      <div className="ad__banner">
-        <img alt="banner" src="https://files.adtonos.com/campaign-banner-L4AkdLZur42SpBG2p8RZhb5dhKoNp2wq.png" />
+        <div className="ad__video_box">
+          <VideoJS options={videoJsOptions} onReady={handlePlayerReady}/>
+        </div>
       </div>
       <img className="ad__close" alt="close" src={closeButton} onClick={() => handleClose()} style={{ opacity: 0 }} ref={closeRef} />
     </div>
-  )
+  ) : ''
 }
 
 export default VideoAd

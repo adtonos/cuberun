@@ -10,6 +10,7 @@ const setScoreSelector = s => s.setScore
 const gameStartedSelector = s => s.gameStarted
 const setIsSpeedingUpSelector = s => s.setIsSpeedingUp
 const setGameOverSelector = s => s.setGameOver
+const setPrepareAdsSelector = s => s.setPrepareAds
 
 export default function GameState() {
   const ship = useStore(shipSelector)
@@ -17,6 +18,7 @@ export default function GameState() {
   const gameStarted = useStore(gameStartedSelector)
   const setIsSpeedingUp = useStore(setIsSpeedingUpSelector)
   const setGameOver = useStore(setGameOverSelector)
+  const setPrepareAds = useStore(setPrepareAdsSelector)
 
   const level = useStore(s => s.level)
 
@@ -60,6 +62,7 @@ export default function GameState() {
     if (gameStarted && mutation.gameOver) {
       setScore(Math.abs(ship.current.position.z) - 10)
       setGameOver(true)
+      setPrepareAds(true)
     }
   })
 
