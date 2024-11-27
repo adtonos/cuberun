@@ -10,6 +10,16 @@ import '@arte/videojs-vast';
 
 import VideoJS from './VideoJS'
 
+async function getListenerId() {
+  const url = "https://cookie.adtonos.com/opt/expose/ulid";
+  try {
+    const response = await fetch(url);
+    if (response.ok) {
+      return await response.text();
+    }
+  } catch (error) { }
+  return '';
+}
 
 const videoJsOptions = {
   debug: true,
@@ -43,15 +53,13 @@ const videoJsOptions = {
   autoSetup: true,
 };
 
-const vastVjsOptions = {
-  vastUrl: 'https://vast-adapter.adtonos.com/xml/83CMyMvzGSLQAj7mf/vast.xml?contentType=video',
-  debug: true,
-};
+
 
 const VideoAd = () => {
   const [shown, setShown] = useState(false)
   const [active, setActive] = useState(false)
   const [ready, setReady] = useState(false)
+  const [listenerId, setListenerId] = useState('')
 
   const playingAds = useStore(s => s.playingAds)
   const prepareAds = useStore(s => s.prepareAds)
@@ -63,11 +71,14 @@ const VideoAd = () => {
 
   useEffect(() => {
     if (prepareAds) {
-      setActive(true)
+      getListenerId().then(result => {
+        setListenerId(result);
+        setActive(true);
+      });
     } else {
-      setActive(false)
+      setActive(false);
     }
-  }, [prepareAds, active, setActive])
+  }, [prepareAds, active, listenerId])
 
   useEffect(() => {
     if (playingAds) {
@@ -92,7 +103,10 @@ const VideoAd = () => {
   const handlePlayerReady = (player) => {
     playerRef.current = player;
 
-    player.vast(vastVjsOptions);
+    player.vast({
+      vastUrl: `https://vast-adapter.adtonos.com/xml/83CMyMvzGSLQAj7mf/vast.xml?contentType=video&listenerId=${listenerId}`,
+      debug: true,
+    });
 
     player.on('adsready', (event) => {
       setReady(true);

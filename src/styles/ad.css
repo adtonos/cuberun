@@ -55,6 +55,6 @@
   transition-delay: unset !important;
 }
 
-body>img {
-  display: none;
+body>img, .iub__us-widget {
+  display: none !important;
 }

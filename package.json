@@ -27,7 +27,7 @@
   },
   "scripts": {
     "start": "HOST=0.0.0.0 NODE_OPTIONS='--openssl-legacy-provider --trace-deprecation' react-scripts start",
-    "build": "NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
+    "build": "PUBLIC_URL=/game NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
     "test": "NODE_OPTIONS=--openssl-legacy-provider react-scripts test",
     "eject": "NODE_OPTIONS=--openssl-legacy-provider react-scripts eject"
   },
